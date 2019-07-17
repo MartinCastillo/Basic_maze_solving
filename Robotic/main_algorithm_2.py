@@ -25,7 +25,7 @@ import cv2
 from time import sleep
 from random import randint
 #Local imports
-import gui_adaptada
+import gui_algorithm_2
 
 #Global variables
 screen_size = 500
