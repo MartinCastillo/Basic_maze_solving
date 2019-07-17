@@ -1,11 +1,10 @@
 #|This is the code which you executate
 #___________________________________________________________________________________________|
 #|Este codigo implementa el siguente algoritmo:                                             |
-#|Azigna un numero 0 a todos los caminos como antes, suma al lugar por el que pase          |
+#|Asigna un numero 0 a todos los caminos como antes, suma al lugar por el que pase          |
 #|un 1 cada vez, simpre va en direción a donde hay un número menor, en  caso de             |
 #|haber varias opciones se elige con una prioridad aleatoria, sigue así hasta llegar        |
 #|al final, un -1 ,siempre tomará esta opcion pues no puede haber una menor.                |
-#|Es como el anterior pero recuerda los caminos y se devuelve por ellos de ser necesario.   |
 #___________________________________________________________________________________________|
 #|This code implemens the following algorithm:                                              |
 #|Assigns a number 0 to all the paths, sums 1 to a block where it passes, choose the path   |
