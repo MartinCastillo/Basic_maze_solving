@@ -13,7 +13,7 @@
 #||Basiclly it remembers the passed paths and avoid them.                                   |
 #___________________________________________________________________________________________|
 #Global imports
-import numpy as n|p
+import numpy as np
 from matplotlib import pyplot as plt
 import cv2
 from time import sleep
