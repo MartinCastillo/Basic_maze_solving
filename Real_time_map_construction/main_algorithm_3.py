@@ -1,6 +1,5 @@
 #El objetivo es simular lo que sería la construcción de mapas en tiempo real,
 
-#(empezamos basandonos en el codigo
 #Global imports
 import numpy as np
 from matplotlib import pyplot as plt
@@ -20,6 +19,7 @@ delay=100
 font_size=2
 
 #nxn matrix for the maze format, 0 is nothing, 999 is wall,-1 is ending
+#Intentamos simular un ambiente para que el 'robot' pueda explorar,moverse
 maze_format=np.array(
 [[999,999,999,999,999,999,999,999,999,999,999,999,999,999,999,999,999,999,999],
  [999,  1,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0],
@@ -42,6 +42,9 @@ maze_format=np.array(
  [999,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, -1],
  [999,999,999,999,999,999,999,999,999,999,999,999,999,999,999,999,999,999,999]]
     )
+#Para hacerlo a escala hacemos una medida de los cuadros
+medida_cuadro = 18#cm
+tamanno_mapa = [maze_format.shape[0]*medida_cuadro,maze_format.shape[1]*medida_cuadro]
 #Es el mapa actual que va a empezar a rellenar
 map = np.array([])
 #Es la posición inicial del robot, que es 0,0 , según se mueva va cambiando
@@ -65,11 +68,14 @@ def see_laterals(maze_format,ycoord,xcoord):
 
 if(__name__=='__main__'):
     arrive = False
-    current_coord=[12,8] #Local coords, in the 'word'
+    current_coord=np.array([12,8])*medida_cuadro #Local coords, in the 'word'
+    print(tamanno_mapa,current_coord)
     iters=0
     giros=0
     seleccion=None
     while(True):
+
+        arrive = True
         if (arrive):
             break
 pass
