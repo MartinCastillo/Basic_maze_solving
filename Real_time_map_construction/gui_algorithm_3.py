@@ -1,3 +1,5 @@
+#En proceso
+
 
 #Por ahora no se realizará una gui importante
 #All the functions needed to show graphically the info

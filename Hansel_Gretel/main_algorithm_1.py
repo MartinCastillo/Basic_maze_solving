@@ -111,17 +111,17 @@ if(__name__=='__main__'):
                         direction_register.append({'UP':res_matrix})
                         seleccion=0
                         break
-                if(randint(0,3)==1) and (min_val == res_matrix[2,1]): #Dpwn
+                if(min_val == res_matrix[2,1]): #Dpwn
                         current_coord = [current_coord[0]+1,current_coord[1]]
                         direction_register.append({'DOWN':res_matrix})
                         seleccion=1
                         break
-                if(randint(0,3)==2) and (min_val == res_matrix[1,0]): #Right
+                if(min_val == res_matrix[1,0]): #Right
                         current_coord = [current_coord[0],current_coord[1]-1]
                         direction_register.append({'RIGHT':res_matrix})
                         seleccion=2
                         break
-                if(randint(0,3)==3) and (min_val == res_matrix[1,2]): #Left
+                if(min_val == res_matrix[1,2]): #Left
                         current_coord = [current_coord[0],current_coord[1]+1]
                         direction_register.append({'LEFT':res_matrix})
                         seleccion=3

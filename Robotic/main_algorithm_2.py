@@ -143,10 +143,10 @@ if(__name__=='__main__'):
     while(True):
             if(maze_format[current_coord[0],current_coord[1]] == -1):
                 break
-            ret, map = gui_adaptada.draw_map(maze_format,screen_size,block_size,
+            ret, map = gui_algorithm_2.draw_map(maze_format,screen_size,block_size,
                 corner_text=str(iters),corner_text_size=font_size,corner_text_color=(100,100,255)
                     )
-            map = gui_adaptada.draw_cube(map,current_coord[0],current_coord[1],
+            map = gui_algorithm_2.draw_cube(map,current_coord[0],current_coord[1],
                 _local,cube_margin,block_size
                     )
             cv2.imshow('1',map)
@@ -184,10 +184,10 @@ if(__name__=='__main__'):
                     action_register.append('cambio turning_direction a {}'.format(
                         turning_direction
                             ))
-    ret, map = gui_adaptada.draw_map(maze_format,screen_size,block_size,
+    ret, map = gui_algorithm_2.draw_map(maze_format,screen_size,block_size,
         corner_text=(str(iters)+' giros'),corner_text_size=font_size
             )
-    map = gui_adaptada.draw_cube(map,current_coord[0],current_coord[1],
+    map = gui_algorithm_2.draw_cube(map,current_coord[0],current_coord[1],
         _local,cube_margin,block_size
             )
     cv2.imshow('1',map)
