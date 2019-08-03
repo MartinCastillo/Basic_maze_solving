@@ -4,7 +4,7 @@ import cv2; import numpy as np
 
 def draw_cube(map,ycoord,xcoord,local_list,margin=5,block_size=20,color=(100,100,255)):
     yres = ycoord*block_size; xres = xcoord*block_size
-    """ prueba
+    """
     This function graph a cube in the x,y coords over the map,
     the format for x,y coords are the index in the maze_format
     matrix, for the graph in a 500x500 we multply x,y by 50 or cubesize
