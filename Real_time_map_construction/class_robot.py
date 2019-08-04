@@ -7,11 +7,12 @@
 #The envrioment can get all the robot's physical information
 def r(local_list):
     """
-    Una permutación el ciclo dado local_list Debe tener un largo 4"""
+    Una permutación al ciclo dado local_list Debe tener un largo 4"""
     res = []
     res.append(local_list[3]);res.append(local_list[0])
     res.append(local_list[1]);res.append(local_list[2])
     return(res)
+
 class Robot:
     def __init__(self,_local,current_coord):
         #La permutación antes descrita, cambiala si quieres variar la dirección inicial
@@ -45,6 +46,29 @@ class Robot:
             print('Error en función "avanzar"')
         return([new_ycoord,new_xcoord])
 
+    def see_laterals(self,maze_format):
+        """
+        This function allow you to know the lateral blocks of the cube, it recives
+        the map and coordinates of the block and returns the 8 lateral blocs in a
+        [left,forward,rigth,backward] array, it has a bolean value
+        """
+        (x,y)= self.current_coord
+        #Now we need to adjust this to the local view of the robot
+        #e.g if the robot direction is the rigth [4,1,2,3], the res array would have
+        #to be in the form [backward,left,forward,rigth]
+        #and to the left [forward,rigth,backward,left]
+        res_matrix = maze_format[y-1:y+2,x-1:x+2]
+        res = [res_matrix[1,0],res_matrix[0,1],res_matrix[1,2],res_matrix[2,1]]
+        #para reconocer giros en el giro o _local, buscamos la posicion del 'izquierda'
+        #en la lista que es un 1
+        index_of_local_forward = self._local.index(1)
+        print(index_of_local_forward)
+        #Si index_of_local_forward vale 0 , la orientación es 'arriba ', y la lista
+        #no se imuta, por cada desface hacemos un giro para ajustar
+        for _ in range(4-index_of_local_forward):#El 4- es para que gire en dirección contraria
+            res = r(res)
+        return(res)
+
     def _consultar_YoX(self,num1,num2,ycoord,xcoord,maze_format):
         """Consulta el eje Y o X dependiendo de la entrada, si num1=-1 consulta arriba
         ,si num1=1 lo hace abajo , si num2=-1 derecha, num2=1 es izquierda,considere
@@ -73,10 +97,12 @@ class Robot:
             print('avanza')
         else:
             print('Una pared se interpone, estas chocando con ella')
+        return 1
 
     def gira_derecha(self):
         self._local=r(self._local)
         print('gira a la derecha')
+
     def gira_izquierda(self):
         self._local=r(r(r(self._local)))
         print('gira a la izquierda')
