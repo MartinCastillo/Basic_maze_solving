@@ -62,7 +62,6 @@ class Robot:
         #para reconocer giros en el giro o _local, buscamos la posicion del 'izquierda'
         #en la lista que es un 1
         index_of_local_forward = self._local.index(1)
-        print(index_of_local_forward)
         #Si index_of_local_forward vale 0 , la orientación es 'arriba ', y la lista
         #no se imuta, por cada desface hacemos un giro para ajustar
         for _ in range(4-index_of_local_forward):#El 4- es para que gire en dirección contraria
@@ -94,15 +93,15 @@ class Robot:
     def avanzar(self,maze_format):
         if(self.disponible(maze_format,self.current_coord[0],self.current_coord[1],self._local)):
             self.current_coord=self._avanzar(self.current_coord[0],self.current_coord[1],self._local)
-            print('avanza')
+            #print('avanza')
         else:
-            print('Una pared se interpone, estas chocando con ella')
-        return 1
+            #print('Una pared se interpone, estas chocando con ella')
+            pass
 
     def gira_derecha(self):
         self._local=r(self._local)
-        print('gira a la derecha')
+        #print('gira a la derecha')
 
     def gira_izquierda(self):
         self._local=r(r(r(self._local)))
-        print('gira a la izquierda')
+        #print('gira a la izquierda')

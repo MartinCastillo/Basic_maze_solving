@@ -62,35 +62,39 @@ if(__name__=='__main__'):
         #anteriores, y acceder a la informacion de res matrix
         ####################################################################
         ####################################################################
+
         #Analizar alrededores, res matrix es la unica informacion del entorno
         #(maze_format)que puede recibir, si se quiere orientar, va a tener
         #que hacerlo con un mapa inerno
         percepcion=robot.see_laterals(maze_format)
         #percepcion es un lista de 4 elementos [izquierda,adelante,derecha,atras]
-
-        print(percepcion)
         robot.avanzar(maze_format)
         #Detectar cruces
-        if(percepcion.count(0)>1):
-            registro_de_acciones.append(robot.current_coord,)
-            robot.avanzar(maze_format)
-
-        robot.gira_derecha()
-        robot.avanzar(maze_format)
+        print(percepcion)
+        """if(percepcion.count(0)>1)and(percepcion[1]!=0):
+            print('a')
+            #Gira en el cruce
+            index = percepcion.index(0)
+            dir = None
+            while(True):
+                if (index == 0)and randint(0,1):#Camino a la izquierda
+                    robot.gira_izquierda(); dir = 1; break
+                if (index == 2)and randint(0,1):#Camino a la derecha
+                    robot.gira_derecha(); dir = 0 ; break
+            registro_de_acciones.append([robot.current_coord,dir])"""
         ####################################################################
         ####################################################################
-        #Dibuja en pantalla
         ret, map = gui_algorithm_3.draw_map(maze_format,screen_size,block_size,
-            corner_text=str('text'),corner_text_size=font_size,corner_text_color=(100,100,255)
+            corner_text=(str('text')+' giros'),corner_text_size=font_size
                 )
-        map = gui_algorithm_3.draw_cube(map,robot.current_coord[0],robot.current_coord[1],
-            robot._local,cube_margin,block_size
+        map = gui_algorithm_3.draw_cube(map,current_coord[0],current_coord[1],
+            _local,cube_margin,block_size
                 )
+        #Terimna programa#
         cv2.imshow('1',map)
-        k = cv2.waitKey(delay)
-        if(k==ord('q')):
+        k = cv2.waitKey(dleay)
+        if(k == ord('q')):
             break
-    #Terimna programa#
     cv2.imshow('1',map)
     k = cv2.waitKey(0)
     if(k==ord('q')):
