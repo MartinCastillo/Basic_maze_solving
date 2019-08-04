@@ -19,6 +19,7 @@ block_size = 25
 cube_margin = 5
 delay=200#delay entre frames
 font_size=2
+visualizar = True
 #El 1 indica la posición local de la izquierda del robot
 initial_orientation = [0,0,0,1]
 
@@ -62,17 +63,20 @@ def render():#Para ahorrar lineas, y usando un decorador, renderizar luego de ca
 
 loop = True
 robot = Robot(initial_orientation,[12,7])
-def render_dec(func):
-    global loop
-    def wraper(*args):
-        func(*args)
-        if(render()):
-            loop = False
-    return wraper
-#Para que luego de cada movimiento renderize un cuadro
-robot.avanzar = render_dec(robot.avanzar)
-robot.gira_derecha = render_dec(robot.gira_derecha)
-robot.gira_derecha = render_dec(robot.gira_izquierda)
+if(visualizar):
+    def render_dec(func):
+        global loop
+        def wraper(*args):
+            func(*args)
+            render()
+            k = cv2.waitKey(delay)
+            if(k == ord('q')):
+                loop = False
+        return wraper
+    #Para que luego de cada movimiento renderize un cuadro
+    robot.avanzar = render_dec(robot.avanzar)
+    robot.gira_derecha = render_dec(robot.gira_derecha)
+    robot.gira_derecha = render_dec(robot.gira_izquierda)
 
 if(__name__=='__main__'):
     while(loop):
@@ -95,7 +99,6 @@ if(__name__=='__main__'):
         percepcion=robot.see_laterals(maze_format)
         #percepcion es un lista de 4 elementos [izquierda,adelante,derecha,atras]
         #Detectar cruces
-        #print(percepcion)
         if(percepcion.count(0)>1)and(percepcion[1]!=0):
             #Gira en el cruce
             index = percepcion.index(0)#Nunca
