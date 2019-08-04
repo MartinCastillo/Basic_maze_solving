@@ -95,7 +95,7 @@ class Robot:
             self.current_coord=self._avanzar(self.current_coord[0],self.current_coord[1],self._local)
             #print('avanza')
         else:
-            #print('Una pared se interpone, estas chocando con ella')
+            print('Una pared se interpone, obj:{} chocando con ella'.format(self.__class__.__name__))
             pass
 
     def gira_derecha(self):
