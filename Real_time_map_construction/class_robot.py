@@ -5,13 +5,20 @@
 #from the envrioment that a robot would get, and return an action, forward, turn,rigth
 #turn left, backwards.
 #The envrioment can get all the robot's physical information
+def r(self,local_list):
+    """
+    Una permutación el ciclo dado local_list Debe tener un largo 4"""
+    res = []
+    res.append(local_list[3]);res.append(local_list[0])
+    res.append(local_list[1]);res.append(local_list[2])
+    return(res)
 class Robot:
     def __init__(self,_local,current_coord):
         #La permutación antes descrita, cambiala si quieres variar la dirección inicial
         #arriba derecha   abajo  izquierda
         self._local = _local
         #Si gira a la derecha _local = [4,1,2,3]
-        #2 * derecha = abajo ,_local = [3,4,1,2s]
+        #2 * derecha = abajo ,_local = [3,4,1,2]
         #a la izquierda _local = [2,3,4,1] = 3 * derecha
         #Llamaremos esta rotación a la drecha r
         self.current_coord = current_coord
@@ -38,13 +45,6 @@ class Robot:
             print('Error en función "avanzar"')
         return(new_ycoord,new_xcoord)
 
-    def r(self,local_list):
-        """
-        Una permutación el ciclo dado local_list Debe tener un largo 4"""
-        res = []
-        res.append(local_list[3]);res.append(local_list[0])
-        res.append(local_list[1]);res.append(local_list[2])
-        return(res)
     def _consultar_YoX(self,num1,num2,ycoord,xcoord,maze_format):
         """Consulta el eje Y o X dependiendo de la entrada, si num1=-1 consulta arriba
         ,si num1=1 lo hace abajo , si num2=-1 derecha, num2=1 es izquierda,considere
@@ -74,8 +74,8 @@ class Robot:
             print('Una pared se interpone, estas chocando con ella')
 
     def gira_derecha(self):
-        self._local=self.r(self._local)
+        self._local=r(self._local)
         print('gira a la derecha')
     def gira_izquierda(self):
-        self._local=self.r(self.r(self.r(self._local)))
+        self._local=r(r(r(self._local)))
         print('gira a la izquierda')

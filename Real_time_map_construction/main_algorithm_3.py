@@ -10,7 +10,7 @@ from random import randint
 
 #Local imports
 import gui_algorithm_3
-from class_robot import Robot
+from class_robot import Robot,r
 
 #Global variables
 screen_size = 500
@@ -45,18 +45,18 @@ maze_format=np.array(
     )
 
 action_register=[]
-
-def see_laterals(maze_format,ycoord,xcoord):
+def see_laterals(maze_format,ycoord,xcoord,_local):
     """
     This function allow you to know the lateral blocks of the cube, it recives
     the map and coordinates of the block and returns the 8 lateral blocs in a
-    3x3 matrix in format
-    [[n, n, n],
-     [n, 0, n],
-     [n, n, n]] where n is a 1 or 0 or 2 (1 is wall 0 is no wall, 2 is ending)
-                and 0 is an empty space for the shape
+    [left,forward,rigth,backward] array, it has a bolean value
     """
+    #Now we need to adjust this to the local view of the robot
+    #e.g if the robot direction is the rigth [4,1,2,3], the res array would have
+    #to be in the form [backward,left,forward,rigth]
+    #and to the left [forward,rigth,backward,left]
     res_matrix = maze_format[ycoord-1:ycoord+2,xcoord-1:xcoord+2]
+    res = [maze_format[1,0],maze_format[0,1],maze_format[1,2],maze_format[2,1]]
     return(res_matrix)
 
 if(__name__=='__main__'):
@@ -65,7 +65,7 @@ if(__name__=='__main__'):
             #Si llegas
             if(maze_format[robot.current_coord[0],robot.current_coord[1]] == -1):
                 break
-            
+
             #robot.avanza(maze_format)
             #robot.gira_derecha()
             #robot.gira_izquierda()
@@ -76,9 +76,9 @@ if(__name__=='__main__'):
             #Analizar alrededores, res matrix es la unica informacion del entorno
             #(maze_format)que puede recibir, si se quiere orientar, va a tener
             #que hacerlo con un mapa inerno
-            res_matrix=see_laterals(maze_format,robot.current_coord[0],robot.current_coord[1])
+            res_matrix=see_laterals(maze_format,robot.current_coord[0],robot.current_coord[1],robot._local)
             robot.avanzar(maze_format)
-            robot.gira_derecha()
+            #robot.gira_derecha()
 
             ####################################################################
             ####################################################################
