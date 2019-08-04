@@ -5,7 +5,7 @@
 #from the envrioment that a robot would get, and return an action, forward, turn,rigth
 #turn left, backwards.
 #The envrioment can get all the robot's physical information
-def r(self,local_list):
+def r(local_list):
     """
     Una permutación el ciclo dado local_list Debe tener un largo 4"""
     res = []
@@ -43,7 +43,7 @@ class Robot:
             new_xcoord = xcoord-1
         else:
             print('Error en función "avanzar"')
-        return(new_ycoord,new_xcoord)
+        return([new_ycoord,new_xcoord])
 
     def _consultar_YoX(self,num1,num2,ycoord,xcoord,maze_format):
         """Consulta el eje Y o X dependiendo de la entrada, si num1=-1 consulta arriba
@@ -69,7 +69,8 @@ class Robot:
 
     def avanzar(self,maze_format):
         if(self.disponible(maze_format,self.current_coord[0],self.current_coord[1],self._local)):
-            current_coord=self._avanzar(self.current_coord[0],self.current_coord[1],self._local)
+            self.current_coord=self._avanzar(self.current_coord[0],self.current_coord[1],self._local)
+            print('avanza')
         else:
             print('Una pared se interpone, estas chocando con ella')
 
