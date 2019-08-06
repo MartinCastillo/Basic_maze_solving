@@ -21,7 +21,7 @@ delay=200#delay entre frames
 font_size=2
 visualizar = True
 #El 1 indica la posición local de la izquierda del robot
-initial_orientation = [0,0,0,1]
+initial_orientation = [1,0,0,0]
 
 #nxn matrix for the maze format, 0 is nothing in the place, 999 is wall,-1 is ending
 #The robot cant acces to this information, only throgth the lateral blocks
@@ -61,12 +61,13 @@ def render():#Para ahorrar lineas, y usando un decorador, renderizar luego de ca
         return(True)
     return(False)
 
+robot = Robot(initial_orientation,[12,8])
 loop = True
-robot = Robot(initial_orientation,[12,7])
+
 if(visualizar):
     def render_dec(func):
-        global loop
         def wraper(*args):
+            global loop
             func(*args)
             render()
             k = cv2.waitKey(delay)
@@ -99,17 +100,19 @@ if(__name__=='__main__'):
         percepcion=robot.see_laterals(maze_format)
         #percepcion es un lista de 4 elementos [izquierda,adelante,derecha,atras]
         #Detectar cruces
-        if(percepcion.count(0)>1)and(percepcion[1]!=0):
-            #Gira en el cruce
-            index = percepcion.index(0)#Nunca
+
+        if (percepcion[0] == 0) or (percepcion[2] == 0):
             dir = None
             while(True):
-                if (index == 0)and randint(0,1):#Camino a la izquierda
-                    robot.gira_izquierda(); dir = 1; break
-                if (index == 2)and randint(0,1):#Camino a la derecha
-                    robot.gira_derecha(); dir = 0 ; break
-            registro_de_acciones.append([robot.current_coord,dir])
-        print(loop)
+                if((percepcion[0] == 0)and randint(0,1)):
+                    #Girará a la izquierda
+                    print('L')
+                    dir = True ; robot.gira_izquierda();break
+                if((percepcion[2] == 0)and randint(0,1)):
+                    #Girará a la derecha
+                    print('R')
+                    dir = False ; robot.gira_derecha();break
+        registro_de_acciones.append([robot.current_coord,dir])
         ####################################################################
         ####################################################################
     k = cv2.waitKey(0)
